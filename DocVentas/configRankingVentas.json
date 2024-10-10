@@ -1,0 +1,24 @@
+{
+  "settingsReloadIntervalMinutes": 1,
+  "fullscreen": true,
+  "autoStart": true,
+  "lazyLoadTabs": false,
+  "closeExistingTabs": false,
+  "websites": [
+    {
+      "url": "https://app.powerbi.com/groups/me/apps/2ce47f25-bf24-4897-98d8-24d994fcf369/reports/39647545-85d0-445b-a7bd-d1234198e920/ReportSection?ctid=f2782d7d-d11b-4aba-a26a-bc8782409cb5&experience=power-bi",
+      "duration": 8,
+      "tabReloadIntervalSeconds": 15
+    },
+    {
+      "url": "https://app.powerbi.com/groups/me/apps/2ce47f25-bf24-4897-98d8-24d994fcf369/reports/3c68157c-77a1-4882-af41-7abf700498ef/ReportSection3712b9618e0a799ea54b?ctid=f2782d7d-d11b-4aba-a26a-bc8782409cb5&experience=power-bi",
+      "duration": 8,
+      "tabReloadIntervalSeconds": 15
+    },
+    {
+      "url": "https://app.powerbi.com/Redirect?action=OpenReport&appId=2ce47f25-bf24-4897-98d8-24d994fcf369&reportObjectId=3c68157c-77a1-4882-af41-7abf700498ef&ctid=f2782d7d-d11b-4aba-a26a-bc8782409cb5&reportPage=ReportSectionb65fc8b1008e091807ce&pbi_source=appShareLink&portalSessionId=175e911f-e7d5-43db-bd97-00616e55e6d5",
+      "duration": 8,
+      "tabReloadIntervalSeconds": 15
+    }
+  ]
+}
