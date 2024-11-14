@@ -6,6 +6,11 @@
   "closeExistingTabs": false,
   "websites": [
     {
+      "url": "https://lowito9.github.io/ImgVentas/Diapositiva1.PNG",
+      "duration": 100,
+      "tabReloadIntervalSeconds": 600
+    },
+    {
       "url": "https://app.powerbi.com/view?r=eyJrIjoiNGU0ODIzOTUtZjA5Yy00ZTZiLTllMmUtMmE1NGVmNzQyZmMzIiwidCI6ImYyNzgyZDdkLWQxMWItNGFiYS1hMjZhLWJjODc4MjQwOWNiNSIsImMiOjh9&pageName=ReportSection",
       "duration": 50,
       "tabReloadIntervalSeconds": 600
