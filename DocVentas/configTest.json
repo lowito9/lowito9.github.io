@@ -1,0 +1,14 @@
+{
+  "settingsReloadIntervalMinutes": 1,
+  "fullscreen": true,
+  "autoStart": true,
+  "lazyLoadTabs": false,
+  "closeExistingTabs": false,
+  "websites": [
+    {
+      "url": "https://lowito9.github.io/ImgVentas/Diapositiva1.PNG",
+      "duration": 80,
+      "tabReloadIntervalSeconds": 600
+    }
+  ]
+}
