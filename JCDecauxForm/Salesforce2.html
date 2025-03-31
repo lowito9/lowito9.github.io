@@ -81,7 +81,8 @@ const vCardText = 'BEGIN:VCARD\nVERSION:3.0\nFN:Nombre Apellido\nTEL:+5255322771
 const encodedVCard = encodeURIComponent(vCardText);
 var url = 'https://wa.me/525532277185?text=${encodedVCard}';
 
-window.open(url, '_self');        
+window.location = "https://wa.me/525532277185?text=Mi nombre es  "+nombre
+//window.open(url, '_self');        
 //window.location.href="https://wa.me/525532277185?text=Mi nombre es "+nombre+' '+apellido +" y mi correo es "+mail+"de la compañia "+ company
 }
 </script>
