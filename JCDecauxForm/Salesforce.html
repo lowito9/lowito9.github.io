@@ -63,8 +63,8 @@ const params = new URLSearchParams(document.location.search);
 var nombre = params.get("nombre");
 console.log(nombre)
 var valor=document.getElementById('#00Ncc000000UXrN');
-console.log(valor[0]);
-valor.value=(nombre);
+
+
 
 </script>
 <script>
@@ -75,7 +75,7 @@ var apellido=document.getElementById('last_name');
 var telefono=document.getElementById('phone');
 var mail=document.getElementById('email');
 var company=document.getElementById('company');
-
+alert (nombre);
 window.location.href="https://wa.me/525532277185?text="+nombre+' '+apellido
 }
 </script>
