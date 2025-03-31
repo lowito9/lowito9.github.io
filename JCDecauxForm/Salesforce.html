@@ -54,12 +54,42 @@
             max-width: 300px;
         }
     </style>
+<script>
+const params = new URLSearchParams(document.location.search);
+var nombre = params.get("nombre");
+console.log(nombre)
+var valor=document.getElementById('#00Ncc000000UXrN');
+console.log(valor[0]);
+valor.value=(nombre);
+
+</script>
+<script>        
+document.getElementById('formulario').addEventListener('submit', function(event) 
+{            
+event.preventDefault(); // Evita que el formulario se envíe de forma tradicional            
+// Capturar los datos del formulario            
+const nombre = document.getElementById('nombre').value;            
+const telefono = document.getElementById('telefono').value;            
+const email = document.getElementById('email').value;            
+// Número del vendedor (ajústalo al número real, con código de país)            
+const numeroVendedor = '+525532277185'; 
+// Ejemplo, cámbialo por el número deseado            
+// Crear el mensaje con los datos            
+const mensaje = `Hola, soy ${nombre}. Mi número es ${telefono} y mi email es ${email}. Quiero que me contactes.`;            
+// Codificar el mensaje para que sea parte de la URL            
+const mensajeCodificado = encodeURIComponent(mensaje);            
+// Generar el enlace de WhatsApp            
+const whatsappUrl = `https://wa.me/${numeroVendedor}?text=${mensajeCodificado}`;            
+// Redirigir al enlace de WhatsApp            
+window.location.href = whatsappUrl;        
+
+});    </script>
 </head>
 <body>
     <div class="container">
         <div class="box">
             <h2>Formulario de Prospecto</h2>
-            <form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00Dcc0000002wCn" method="POST">
+            <form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00Dcc0000002wCn" name="formulario" method="POST">
                 <input type="hidden" name="oid" value="00Dcc0000002wCn">
                 <input type="hidden" name="retURL" value="https://www.jcdecauxlatam.com/mx">
 
@@ -81,8 +111,8 @@
                                 <input id="lead_source" name="lead_source" value="Qr" type="hidden">
 
                                <input id="00Ncc000000UXrN" maxlength="255" name="00Ncc000000UXrN" size="50" type="hidden" value="Felipe Gonzalez" />
-
-                <input class="blue-button" type="submit" name="submit" value="Enviar">
+		
+                <input class="blue-button" type="submit" name="submit" value="Enviar" >
             </form>
         </div>
     </div>
