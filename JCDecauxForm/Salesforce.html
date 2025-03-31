@@ -78,37 +78,11 @@ var mail=document.getElementById('email').value;
 var company=document.getElementById('company').value;
  
  
-window.location.href="https://wa.me/525532277185?text=Mi nombre es "+nombre+' '+apellido +" y mi correo es "+mail+"de la compañia "+ company
+
 }
 </script>
 <div class="container">
-<div class="box">
-<h2>Formulario de Prospecto</h2>
-<form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00Dcc0000002wCn" name="formulario" method="POST">
-<input type="hidden" name="oid" value="00Dcc0000002wCn">
-
- 
-                <label for="first_name">Nombre</label>
-<input id="first_name" maxlength="40" name="first_name" size="20" type="text" />
- 
-                <label for="last_name">Apellidos</label>
-<input id="last_name" maxlength="80" name="last_name" size="20" type="text" />
- 
-                <label for="phone">Teléfono</label>
-<input id="phone" maxlength="40" name="phone" size="20" type="text" />
- 
-                <label for="email">Email</label>
-<input id="email" maxlength="80" name="email" size="20" type="text" />
- 
-                <label for="company">Compañía</label>
-<input id="company" maxlength="40" name="company" size="20" type="text" />
- 
-                                <input id="lead_source" name="lead_source" value="Qr" type="hidden">
- 
-                               <input id="00Ncc000000UXrN" maxlength="255" name="00Ncc000000UXrN" size="50" type="hidden" />
-<input class="blue-button" type="submit" onclick="whatsapp()" name="submit" value="Enviar" >
-</form>
-</div>
+<a href = "https://wa.me/525532277185?text=Mi nombre es "+nombre+' '+apellido +" y mi correo es "+mail+"de la compañia ">as clic</a>
 </div>
 </body>
 </html>
