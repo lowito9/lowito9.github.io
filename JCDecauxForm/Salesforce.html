@@ -54,6 +54,10 @@
             max-width: 300px;
         }
     </style>
+
+
+</head>
+<body>
 <script>
 const params = new URLSearchParams(document.location.search);
 var nombre = params.get("nombre");
@@ -63,31 +67,47 @@ console.log(valor[0]);
 valor.value=(nombre);
 
 </script>
-<script>        
-document.getElementById('formulario').addEventListener('submit', function(event) 
-{            
-event.preventDefault(); // Evita que el formulario se envíe de forma tradicional            
-// Capturar los datos del formulario            
-const nombre = document.getElementById('nombre').value;            
-const telefono = document.getElementById('telefono').value;            
-const email = document.getElementById('email').value;            
-// Número del vendedor (ajústalo al número real, con código de país)            
-const numeroVendedor = '+525532277185'; 
-// Ejemplo, cámbialo por el número deseado            
-// Crear el mensaje con los datos            
-const mensaje = `Hola, soy ${nombre}. Mi número es ${telefono} y mi email es ${email}. Quiero que me contactes.`;            
-// Codificar el mensaje para que sea parte de la URL            
-const mensajeCodificado = encodeURIComponent(mensaje);            
-// Generar el enlace de WhatsApp            
-const whatsappUrl = `https://wa.me/${numeroVendedor}?text=${mensajeCodificado}`;            
-// Redirigir al enlace de WhatsApp            
-window.location.href = whatsappUrl;        
+<script>
+function whatsapp()
+{
+var nombre=document.getElementById('first_name');
+var apellido=document.getElementById('last_name');
+var telefono=document.getElementById('phone');
+var mail=document.getElementById('email');
+var company=document.getElementById('company');
 
-});    </script>
-</head>
-<body>
+window.location.href="https://wa.me/525532277185?text="+nombre+' '+apellido
+}
+</script>
     <div class="container">
-       <a href="https://api.whatsapp.com/send?phone=525532277185">has clic</a>
+        <div class="box">
+            <h2>Formulario de Prospecto</h2>
+            <form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00Dcc0000002wCn" name="formulario" method="POST">
+                <input type="hidden" name="oid" value="00Dcc0000002wCn">
+                <input type="hidden" name="retURL" value="https://www.jcdecauxlatam.com/mx">
+
+                <label for="first_name">Nombre</label>
+                <input id="first_name" maxlength="40" name="first_name" size="20" type="text" />
+
+                <label for="last_name">Apellidos</label>
+                <input id="last_name" maxlength="80" name="last_name" size="20" type="text" />
+
+                <label for="phone">Teléfono</label>
+                <input id="phone" maxlength="40" name="phone" size="20" type="text" />
+
+                <label for="email">Email</label>
+                <input id="email" maxlength="80" name="email" size="20" type="text" />
+
+                <label for="company">Compañía</label>
+                <input id="company" maxlength="40" name="company" size="20" type="text" />
+
+                                <input id="lead_source" name="lead_source" value="Qr" type="hidden">
+
+                               <input id="00Ncc000000UXrN" maxlength="255" name="00Ncc000000UXrN" size="50" type="hidden" value="Felipe Gonzalez" />
+		
+                <input class="blue-button" type="submit" Onclick="whatsapp()" name="submit" value="Enviar" >
+            </form>
+        </div>
     </div>
 </body>
 </html>
