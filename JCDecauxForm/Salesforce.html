@@ -77,12 +77,14 @@ var telefono=document.getElementById('phone').value;
 var mail=document.getElementById('email').value;
 var company=document.getElementById('company').value;
  
- 
+ window.open('https://wa.me/525532277185?text=Mi nombre es "+nombre+' '+apellido +" y mi correo es "+mail+"de la compañia');
 
 }
 </script>
 <div class="container">
-<a href = "https://wa.me/525532277185?text=Mi nombre es "+nombre+' '+apellido +" y mi correo es "+mail+"de la compañia ">as clic</a>
+        
+
+        <input class="blue-button" type="submit" onclick="whatsapp()" name="submit" value="Enviar" >
 </div>
 </body>
 </html>
