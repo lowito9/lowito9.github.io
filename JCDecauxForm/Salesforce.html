@@ -76,9 +76,9 @@ var apellido=document.getElementById('last_name').value;
 var telefono=document.getElementById('phone').value;
 var mail=document.getElementById('email').value;
 var company=document.getElementById('company').value;
+ var url = "https://wa.me/525532277185?text=Mi nombre es "+nombre+' '+apellido +" y mi correo es "+mail+"de la compañia";
  
- window.open('https://wa.me/525532277185?text=Mi nombre es "+nombre+' '+apellido +" y mi correo es "+mail+"de la compañia');
-
+window.location.assign(url)
 }
 </script>
 <div class="container">
