@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario Web-to-Lead</title>
+    <title>Prospecto Nuevo</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             background-color: #f0f0f0;
             display: flex;
             justify-content: center;
@@ -15,16 +15,16 @@
             margin: 0;
         }
         .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
             text-align: center;
+            width: 300px;
         }
         .box {
-            background-color: #fff;
-            border: 2px solid #ccc;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }vcvgt
+            margin-bottom: 20px;
+        }
         .blue-button {
             background-color: #007bff;
             color: white;
@@ -37,12 +37,8 @@
         .blue-button:hover {
             background-color: #0056b3;
         }
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
         label {
+            display: block;
             margin-top: 10px;
         }
         input[type="text"], input[type="submit"] {
@@ -54,38 +50,31 @@
             max-width: 300px;
         }
     </style>
-
-
 </head>
 <body>
-<script>
-const params = new URLSearchParams(document.location.search);
-var nombre = params.get("nombre");
+    <script>
+        const params = new URLSearchParams(document.location.search);
+        var nombrePropietario = params.get("nombre");
+	document.getElementsByName('00Ncc000000UXrN')[0].value = nombrePropietario;
+    </script>
+    <script>
+        function whatsapp() {
+            var nombre = document.getElementById("first_name").value;
+            var apellido = document.getElementById('last_name').value;
+            var telefono = document.getElementById('phone').value;
+            var mail = document.getElementById('email').value;
+            var company = document.getElementById('company').value;
 
-</script>
-<script>
-function whatsapp()
-{
-
-
-/*var nombre=document.getElementById("first_name").value;
-var apellido=document.getElementById('last_name').value;
-var telefono=document.getElementById('phone').value;
-var mail=document.getElementById('email').value;
-var company=document.getElementById('company').value;*/
-
-
-var url="";
-window.location.assign(url)
-
-}
-</script>
+            var retURL = "https://wa.me/525532277185?text=Mi nombre es: " + nombre + " " + apellido + " y mi correo es " + mail + " y formo parte de la 			 empresa " + company;
+            document.getElementsByName('retURL')[0].value = retURL;
+        }
+    </script>
     <div class="container">
         <div class="box">
             <h2>Prospecto Nuevo</h2>
             <form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00Dcc0000002wCn" name="formulario" method="POST">
                 <input type="hidden" name="oid" value="00Dcc0000002wCn">
-                <input type="hidden" name="retURL" value="https://wa.me/525532277185?text=Hola">
+                <input type="hidden" name="retURL" value="">
 
                 <label for="first_name">Nombre</label>
                 <input id="first_name" maxlength="40" name="first_name" size="20" type="text" />
@@ -102,11 +91,10 @@ window.location.assign(url)
                 <label for="company">Compañía</label>
                 <input id="company" maxlength="40" name="company" size="20" type="text" />
 
-                                <input id="lead_source" name="lead_source" value="Qr" type="hidden">
+                <input id="lead_source" name="lead_source" value="Qr" type="hidden">
+                <input id="00Ncc000000UXrN" maxlength="255" name="00Ncc000000UXrN" size="50" type="hidden" value="Felipe Gonzalez" />
 
-                               <input id="00Ncc000000UXrN" maxlength="255" name="00Ncc000000UXrN" size="50" type="hidden" />
-		
-                <input class="blue-button" type="submit"  name="submit" value="Enviar" >
+                <input class="blue-button" type="submit" onclick="whatsapp()" name="submit" value="Enviar">
             </form>
         </div>
     </div>
