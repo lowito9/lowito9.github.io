@@ -37,7 +37,7 @@ function subirArchivo(file) {
     })
     .catch(error => {
         console.error('Error:', error);
-        document.getElementById('resultado').textContent = 'Hubo un error al subir la vCard.';
+        document.getElementById('resultado').textContent = 'Hubo un error al subir la vCard.' + error;
     });
 }
 
