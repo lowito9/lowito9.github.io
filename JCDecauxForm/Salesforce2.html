@@ -61,6 +61,10 @@
 	function createVCard(firstName, lastName, email, phone, organization) {
     return `BEGIN:VCARD\nVERSION:3.0\nN:${lastName};${firstName};;;\nFN:${firstName} ${lastName}\nORG:${organization}\nEMAIL:${email}\nTEL:${phone}\nEND:VCARD`;
 }
+function encodeVCard(vCard) {
+    return btoa(vCard);
+}
+
 
         function whatsapp(firstName, lastName, email, phone, organization) {
             var nombre = document.getElementById("first_name").value;
@@ -70,7 +74,8 @@
             var company = document.getElementById('company').value;
 		
 		let vCard = createVCard(firstName, lastName, email, phone, organization);
-    		let encodedVCard = encodeURIComponent(vCard);
+
+    		let encodedVCard = encodeVCard(vCard);
 console.log(encodedVCard);
     		let retURL = `https://wa.me/?text=${encodedVCard}`;
              	
@@ -80,7 +85,7 @@ console.log(encodedVCard);
     </script>
     <div class="container">
         <div class="box">
-            <h2>Prospecto Nuevo</h2>
+            <h2>Prospecto Nuevoo</h2>
             <form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00Dcc0000002wCn" name="formulario" method="POST">
                 <input type="hidden" name="oid" value="00Dcc0000002wCn">
                 <input type="hidden" name="retURL" value="">
