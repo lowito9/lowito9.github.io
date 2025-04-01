@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prospecto Nuevo</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            width: 300px;
+        }
+        .box {
+            margin-bottom: 20px;
+        }
+        .blue-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .blue-button:hover {
+            background-color: #0056b3;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="text"], input[type="submit"] {
+            margin-top: 5px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 100%;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+   
+    <script>
+	function createVCard(firstName, lastName, email, phone, organization) {
+    return `BEGIN:VCARD\nVERSION:3.0\nN:${lastName};${firstName};;;\nFN:${firstName} ${lastName}\nORG:${organization}\nEMAIL:${email}\nTEL:${phone}\nEND:VCARD`;
+}
+
+        function whatsapp(firstName, lastName, email, phone, organization) {
+            var nombre = document.getElementById("first_name").value;
+            var apellido = document.getElementById('last_name').value;
+            var telefono = document.getElementById('phone').value;
+            var mail = document.getElementById('email').value;
+            var company = document.getElementById('company').value;
+		
+		let vCard = createVCard(firstName, lastName, email, phone, organization);
+    		let encodedVCard = encodeURIComponent(vCard);
+console.log(encodedVCard);
+    		let retURL = 'https://wa.me/?text=${encodedVCard}';
+             	
+ 		document.getElementsByName('retURL')[0].value = retURL;
+               
+        }
+    </script>
+    <div class="container">
+        <div class="box">
+            <h2>Nuevo Contacto</h2>
+            
+            <button type="button" class="blue-button" onclick='whatsapp("Juan", "Perez", "juan.perez@example.com", "525532277185", "Mi Empresa")'>Click Me!</button>
+        </div>
+    </div>
+</body>
+</html>
