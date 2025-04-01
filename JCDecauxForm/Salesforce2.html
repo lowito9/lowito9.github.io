@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prospecto Nuevo</title>
+    <title>Compartir Contacto por WhatsApp</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -41,7 +41,7 @@
             display: block;
             margin-top: 10px;
         }
-        input[type="text"], input[type="submit"] {
+        input[type="text"], input[type="email"], input[type="tel"], input[type="submit"] {
             margin-top: 5px;
             padding: 10px;
             border-radius: 5px;
@@ -52,65 +52,47 @@
     </style>
 </head>
 <body>
-    <script>
-        const params = new URLSearchParams(document.location.search);
-        var nombrePropietario = params.get("nombre");
-	
-    </script>
-    <script>
-	function createVCard(firstName, lastName, email, phone, organization) {
-    return `BEGIN:VCARD\nVERSION:3.0\nN:${lastName};${firstName};;;\nFN:${firstName} ${lastName}\nORG:${organization}\nEMAIL:${email}\nTEL:${phone}\nEND:VCARD`;
-}
-function encodeVCard(vCard) {
-    return btoa(vCard);
-}
-
-
-        function whatsapp(firstName, lastName, email, phone, organization) {
-            var nombre = document.getElementById("first_name").value;
-            var apellido = document.getElementById('last_name').value;
-            var telefono = document.getElementById('phone').value;
-            var mail = document.getElementById('email').value;
-            var company = document.getElementById('company').value;
-		
-		let vCard = createVCard(firstName, lastName, email, phone, organization);
-
-    		let encodedVCard = encodeVCard(vCard);
-console.log(encodedVCard);
-    		let retURL = `https://wa.me/?text=${encodedVCard}`;
-             	
- 		document.getElementsByName('retURL')[0].value = retURL;
-               
-        }
-    </script>
     <div class="container">
         <div class="box">
-            <h2>Prospecto Nuevoo</h2>
-            <form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00Dcc0000002wCn" name="formulario" method="POST">
-                <input type="hidden" name="oid" value="00Dcc0000002wCn">
-                <input type="hidden" name="retURL" value="">
+            <h2>Compartir Contacto por WhatsApp</h2>
+            <form id="contactForm">
+                <label for="firstName">Nombre:</label>
+                <input type="text" id="firstName" name="firstName"><br>
 
-                <label for="first_name">Nombre</label>
-                <input id="first_name" maxlength="40" name="first_name" size="20" type="text" />
+                <label for="lastName">Apellidos:</label>
+                <input type="text" id="lastName" name="lastName"><br>
 
-                <label for="last_name">Apellidos</label>
-                <input id="last_name" maxlength="80" name="last_name" size="20" type="text" />
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email"><br>
 
-                <label for="phone">Teléfono</label>
-                <input id="phone" maxlength="40" name="phone" size="20" type="text" />
+                <label for="phone">Teléfono:</label>
+                <input type="tel" id="phone" name="phone"><br>
 
-                <label for="email">Email</label>
-                <input id="email" maxlength="80" name="email" size="20" type="text" />
+                <label for="organization">Organización:</label>
+                <input type="text" id="organization" name="organization"><br>
 
-                <label for="company">Compañía</label>
-                <input id="company" maxlength="40" name="company" size="20" type="text" />
-
-                <input id="lead_source" name="lead_source" value="Qr" type="hidden">
-                <input id="00Ncc000000UXrN" maxlength="255" name="00Ncc000000UXrN" size="50" type="hidden" value="Felipe Gonzalez" />
-
-                <input class="blue-button" type="submit" onclick='whatsapp("Juan", "Perez", "juan.perez@example.com", "525532277185", "Mi Empresa")' name="submit" value="Enviar">
+                <button type="button" id="sendButton" class="blue-button">Enviar</button>
             </form>
         </div>
     </div>
+
+    <script>
+        function shareContactViaWhatsApp(firstName, lastName, email, phone, organization) {
+            let contactInfo = `Nombre: ${firstName} ${lastName}\nEmail: ${email}\nTeléfono: ${phone}\nOrganización: ${organization}`;
+            let encodedContactInfo = encodeURIComponent(contactInfo);
+            let whatsappURL = `https://wa.me/?text=${encodedContactInfo}`;
+            window.location.href = whatsappURL;
+        }
+
+        document.getElementById('sendButton').addEventListener('click', function() {
+            let firstName = document.getElementById('firstName').value;
+            let lastName = document.getElementById('lastName').value;
+            let email = document.getElementById('email').value;
+            let phone = document.getElementById('phone').value;
+            let organization = document.getElementById('organization').value;
+
+            shareContactViaWhatsApp(firstName, lastName, email, phone, organization);
+        });
+    </script>
 </body>
 </html>
