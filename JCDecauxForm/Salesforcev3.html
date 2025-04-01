@@ -52,53 +52,51 @@
     </style>
 </head>
 <body>
-    <script>
+<script>
         const params = new URLSearchParams(document.location.search);
         var nombrePropietario = params.get("nombre");
-	document.getElementsByName('00Ncc000000UXrN')[0].value = nombrePropietario;
-    </script>
-    <script>
-        function whatsapp() {
+</script>
+<script>
+        function whatsapp(firstName, lastName, email, phone, organization) {
             var nombre = document.getElementById("first_name").value;
             var apellido = document.getElementById('last_name').value;
             var telefono = document.getElementById('phone').value;
             var mail = document.getElementById('email').value;
             var company = document.getElementById('company').value;
-		var vCardText = 'BEGIN:VCARD\nVERSION:3.0\nFN:Nombre Apellido\nTEL:+525532277185\nEND:VCARD';
-		var encodedVCard = encodeURIComponent(vCardText);
-            var retURL = 'https://wa.me/525532277185?text=${encodedVCard}';
-
-            document.getElementsByName('retURL')[0].value = retURL;
+		let vCard = createVCard(firstName, lastName, email, phone, organization);
+    		let encodedVCard = encodeURIComponent(vCard);
+    		let retURL = 'https://wa.me/?text=${encodedVCard}';
+             	window.location.href = retURL;
         }
-    </script>
-    <div class="container">
-        <div class="box">
-            <h2>Prospecto Nuevo</h2>
-            <form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00Dcc0000002wCn" name="formulario" method="POST">
-                <input type="hidden" name="oid" value="00Dcc0000002wCn">
-                <input type="hidden" name="retURL" value="">
-
+</script>
+<div class="container">
+<div class="box">
+<h2>Prospecto Nuevo</h2>
+<form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00Dcc0000002wCn" name="formulario" method="POST">
+<input type="hidden" name="oid" value="00Dcc0000002wCn">
+<input type="hidden" name="retURL" value="">
+ 
                 <label for="first_name">Nombre</label>
-                <input id="first_name" maxlength="40" name="first_name" size="20" type="text" />
-
+<input id="first_name" maxlength="40" name="first_name" size="20" type="text" />
+ 
                 <label for="last_name">Apellidos</label>
-                <input id="last_name" maxlength="80" name="last_name" size="20" type="text" />
-
+<input id="last_name" maxlength="80" name="last_name" size="20" type="text" />
+ 
                 <label for="phone">Teléfono</label>
-                <input id="phone" maxlength="40" name="phone" size="20" type="text" />
-
+<input id="phone" maxlength="40" name="phone" size="20" type="text" />
+ 
                 <label for="email">Email</label>
-                <input id="email" maxlength="80" name="email" size="20" type="text" />
-
+<input id="email" maxlength="80" name="email" size="20" type="text" />
+ 
                 <label for="company">Compañía</label>
-                <input id="company" maxlength="40" name="company" size="20" type="text" />
-
+<input id="company" maxlength="40" name="company" size="20" type="text" />
+ 
                 <input id="lead_source" name="lead_source" value="Qr" type="hidden">
-                <input id="00Ncc000000UXrN" maxlength="255" name="00Ncc000000UXrN" size="50" type="hidden" value="Felipe Gonzalez" />
-
-                <input class="blue-button" type="submit" onclick="whatsapp()" name="submit" value="Enviar">
-            </form>
-        </div>
-    </div>
+<input id="00Ncc000000UXrN" maxlength="255" name="00Ncc000000UXrN" size="50" type="hidden" value="Felipe Gonzalez" />
+ 
+                <input class="blue-button" type="submit" onclick="whatsapp(Juan", "Perez", "juan.perez@example.com", "525532277185", "Mi Empresa")" name="submit" value="Enviar">
+</form>
+</div>
+</div>
 </body>
 </html>
