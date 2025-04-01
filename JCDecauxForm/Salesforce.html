@@ -65,13 +65,13 @@
             var mail = document.getElementById('email').value;
             var company = document.getElementById('company').value;
 
-            var retURL = "https://wa.me/525532277185?text=Mi nombre es: " + nombre + " " + apellido + " y mi correo es " + mail + " y formo parte de la 			 empresa " + company;
+            var retURL = "https://wa.me/525543497313?text=Mi nombre es: " + nombre + " " + apellido + " y mi correo es " + mail + " y formo parte de la 			 empresa " + company;
             document.getElementsByName('retURL')[0].value = retURL;
         }
     </script>
     <div class="container">
         <div class="box">
-            <h2>Prospecto Nuevo</h2>
+            <h2>Nuevo Contacto</h2>
             <form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00Dcc0000002wCn" name="formulario" method="POST">
                 <input type="hidden" name="oid" value="00Dcc0000002wCn">
                 <input type="hidden" name="retURL" value="">
