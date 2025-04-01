@@ -16,6 +16,7 @@ END:VCARD`;
     const blob = new Blob([vCard], { type: 'text/vcard' });
     const file = new File([blob], 'contacto.vcf', { type: 'text/vcard' });
 
+        console.log(file);
     subirArchivo(file);
 });
 
