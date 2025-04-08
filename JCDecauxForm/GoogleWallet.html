@@ -67,7 +67,7 @@ pE2MrrwP3Amm1BxptI/ZyXdkxsDKBeb7Alms7ufZGBmf/8uW5ON4yTuIWXFl3gm5
         function generateJWT() {
             const header = { alg: "RS256", typ: "JWT" };
             const jwtToken = KJUR.jws.JWS.sign("RS256", header, payload, privateKey);
-            const saveUrl = https://pay.google.com/gp/v/save/${jwtToken};
+            const saveUrl = `https://pay.google.com/gp/v/save/${jwtToken}`;
             document.getElementById("generatedUrl").innerHTML = Haz clic para agregar a Google Wallet: <a href="${saveUrl}" target="_blank">${saveUrl}</a>;
         }
 
