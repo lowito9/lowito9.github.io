@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Formulario Web-to-Lead</title>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compartir Contacto por WhatsApp</title>
+    <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             background-color: #f0f0f0;
             display: flex;
             justify-content: center;
@@ -15,15 +15,15 @@
             margin: 0;
         }
         .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
             text-align: center;
+            width: 300px;
         }
         .box {
-            background-color: #fff;
-            border: 2px solid #ccc;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
         .blue-button {
             background-color: #007bff;
@@ -37,15 +37,11 @@
         .blue-button:hover {
             background-color: #0056b3;
         }
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
         label {
+            display: block;
             margin-top: 10px;
         }
-        input[type="text"], input[type="submit"] {
+        input[type="text"], input[type="email"], input[type="tel"], input[type="submit"] {
             margin-top: 5px;
             padding: 10px;
             border-radius: 5px;
@@ -53,62 +49,50 @@
             width: 100%;
             max-width: 300px;
         }
-</style>
- 
- 
+    </style>
 </head>
 <body>
-<script>
-const params = new URLSearchParams(document.location.search);
-var nombre = params.get("nombre");
-var valor=document.getElementById('00Ncc000000UXrN').value;
- 
-document.getElementById('00Ncc000000UXrN').value=valor;
- 
-</script>
-<script>
-function whatsapp()
-{
- 
- 
-var nombre=document.getElementById("first_name").value;
-var apellido=document.getElementById('last_name').value;
-var telefono=document.getElementById('phone').value;
-var mail=document.getElementById('email').value;
-var company=document.getElementById('company').value;
- 
- 
-window.location.href="https://wa.me/525532277185?text=Mi nombre es "+nombre+' '+apellido +" y mi correo es "+mail+"de la compañia "+ company
-}
-</script>
-<div class="container">
-<div class="box">
-<h2>Formulario de Prospecto</h2>
-<form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00Dcc0000002wCn" name="formulario" method="POST">
-<input type="hidden" name="oid" value="00Dcc0000002wCn">
+    <div class="container">
+        <div class="box">
+            <h2>Compartir Contacto por WhatsApp</h2>
+            <form id="contactForm">
+                <label for="firstName">Nombre:</label>
+                <input type="text" id="firstName" name="firstName"><br>
 
- 
-                <label for="first_name">Nombre</label>
-<input id="first_name" maxlength="40" name="first_name" size="20" type="text" />
- 
-                <label for="last_name">Apellidos</label>
-<input id="last_name" maxlength="80" name="last_name" size="20" type="text" />
- 
-                <label for="phone">Teléfono</label>
-<input id="phone" maxlength="40" name="phone" size="20" type="text" />
- 
-                <label for="email">Email</label>
-<input id="email" maxlength="80" name="email" size="20" type="text" />
- 
-                <label for="company">Compañía</label>
-<input id="company" maxlength="40" name="company" size="20" type="text" />
- 
-                                <input id="lead_source" name="lead_source" value="Qr" type="hidden">
- 
-                               <input id="00Ncc000000UXrN" maxlength="255" name="00Ncc000000UXrN" size="50" type="hidden" />
-<input class="blue-button" type="submit" onclick="whatsapp()" name="submit" value="Enviar" >
-</form>
-</div>
-</div>
+                <label for="lastName">Apellidos:</label>
+                <input type="text" id="lastName" name="lastName"><br>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email"><br>
+
+                <label for="phone">Teléfono:</label>
+                <input type="tel" id="phone" name="phone"><br>
+
+                <label for="organization">Organización:</label>
+                <input type="text" id="organization" name="organization"><br>
+
+                <button type="button" id="sendButton" class="blue-button">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function shareContactViaWhatsApp(firstName, lastName, email, phone, organization) {
+            let contactInfo = `Nombre: ${firstName} ${lastName}\nEmail: ${email}\nTeléfono: ${phone}\nOrganización: ${organization}`;
+            let encodedContactInfo = encodeURIComponent(contactInfo);
+            let whatsappURL = `https://wa.me/?text=${encodedContactInfo}`;
+            window.location.href = whatsappURL;
+        }
+
+        document.getElementById('sendButton').addEventListener('click', function() {
+            let firstName = document.getElementById('firstName').value;
+            let lastName = document.getElementById('lastName').value;
+            let email = document.getElementById('email').value;
+            let phone = document.getElementById('phone').value;
+            let organization = document.getElementById('organization').value;
+
+            shareContactViaWhatsApp(firstName, lastName, email, phone, organization);
+        });
+    </script>
 </body>
 </html>
