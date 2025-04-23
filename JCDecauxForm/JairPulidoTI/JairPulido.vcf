@@ -12,4 +12,5 @@ item4.X-ABLabel;CHARSET=UTF-8:Dirección
 item4.X-ABADR:méxico
 item6.URL:https://www.jcdecauxlatam.com/mx
 item6.X-ABLabel;CHARSET=UTF-8:Clic Aqui
-PHOTO;VALUE=uri:https://lowito9.github.io/JCDecauxForm/JairPulidoTI/JairPulido.png
+PHOTO;VALUE=uri:https://lowito9.github.io/JCDecauxForm/JairPulidoTI/JairPulido.png=
+END:VCARD
