@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jair Pulido Betancourt</title>
+    
+    <link rel="shortcut icon" href="Luis.ico" />
+    
+    <style>
+        body {
+            background-color: #e6f0fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+          }
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 420px;
+            padding-bottom: 30px;
+        }
+
+        .card {
+            width: 100%;
+            background-color: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        .card img {
+            width: 100%;
+            border-radius: 5px 5px 0 0;
+        }
+        .card-container {
+            padding: 16px;
+        }
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+        .profile-section {
+            position: relative;
+            width: 100%;
+            height: 460px;
+          }
+          
+          .profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.95);
+          }
+          
+          .profile-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            color: white;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+          }
+          
+          .profile-info h1 {
+            font-size: 42px;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+          }
+          
+          .profile-info p {
+            font-size: 24px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+          }
+          .contact-section {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .link-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            cursor: pointer;
+        }
+        
+        .link-item:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .link-text {
+            display: flex;
+            align-items: center;
+            color: #333;
+            font-size: 16px;
+        }
+        
+        .link-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+        }
+        
+        .arrow-icon {
+            color: #ccc;
+        }
+        
+        .contact-data {
+            padding: 20px;
+        }
+        
+        .data-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .data-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #0275d8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            margin-right: 10px;
+        }
+        
+        .data-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .data-item {
+            margin-bottom: 20px;
+        }
+        
+        .data-label {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .data-value {
+            font-size: 15px;
+            color: #666;
+        }
+        
+        .data-address {
+            margin-top: 5px;
+            font-size: 15px;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .direction-button {
+            background-color: #043c78;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        
+        .direction-button:hover {
+            background-color: #032a54;
+        }
+        
+        .gallery {
+            margin-bottom: 20px;
+        }
+        
+        .gallery-image {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        
+        .section-subtitle {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        a {
+            text-decoration: none;
+        }
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px 0;
+          }
+        .bottom-buttons {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+          }
+          
+          .qr-button, .share-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #002b54;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+          }
+          
+          .qr-button img, .share-button img {
+            width: 30px;
+            height: 30px;
+            filter: invert(1);
+          }
+          .add-contact-button {
+            position: absolute;
+            right: 20px;
+            bottom: 0;
+            background-color: #002b54;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 9px 9px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          }
+          
+          .add-contact-button:hover {
+            background-color: #003c73;
+          }
+          .fixed-div {
+            position: fixed;
+            width: 100px;
+            height: 75px;
+            padding: -50px;
+            text-align: center;
+        }
+        .top-left {
+            top: 10px;
+            left: 10px;
+        }
+        .top-right {
+            top: 10px;
+            right: 10px;
+        }
+        .bottom-left {
+            bottom: 10px;
+            left: 10px;
+        }
+        .bottom-right {
+            bottom: 10px;
+            right: 10px;
+        }
+        
+        .circle {
+            width: 50px;
+            height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            position: relative;
+        }
+        .circle::before, .circle::after {
+            content: '';
+            position: absolute;
+            background-color: #002b54;
+        }
+        .circle::before {
+            width: 20px;
+            height: 4px;
+            top: 17px;
+            left: 7px;
+        }
+        .circle::after {
+            width: 4px;
+            height: 20px;
+            top: 9px;
+            left: 15px;
+        }
+
+      
+    </style>
+    <style>
+        /* Estilos para la ventana modal */
+        .modal {
+            display: none; /* Oculta la ventana por defecto */
+            position: fixed; /* Posición fija */
+            z-index: 1; /* Sitúa la ventana sobre otros elementos */
+            left: 0;
+            top: 0;
+            width: 100%; /* Ancho completo */
+            height: 100%; /* Alto completo */
+            overflow: auto; /* Habilita el scroll si es necesario */
+            background-color: rgba(0,0,0,0.4); /* Fondo negro con opacidad */
+        }
+        .modal-content {
+            background-color: #ffffff;
+         
+            padding: 20px;
+            border: 1px solid #888;
+            width: 88%; /* Ancho de la ventana */
+            height: 94%;
+        }
+        .close {
+            position: absolute;
+            top: 20px;
+            left: 20px; /* Posiciona el botón a la izquierda */
+            width: 30px;
+            height: 30px;
+            background-color: #181717; /* Color de fondo del círculo */
+            color: white; /* Color de la "X" */
+            border: none;
+            border-radius: 50%; /* Hace el botón circular */
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 30px; /* Centra la "X" verticalmente */
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            background-color: #d32f2f; /* Color de fondo al pasar el mouse */
+        }
+        /* Estilos para las imágenes en círculo */
+        .circle-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: inline-block;
+            margin: 10px;
+            margin-bottom: 150px;
+          
+        }
+
+        .circle-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Estilos para el texto */
+        .text {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .containerModal {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 90vh;
+            background-color: #ffffff;
+            align-content: space-around;
+            flex-wrap: wrap;
+            flex-direction: row-reverse;
+        }
+
+        /* Estilos para el contenido del div */
+        .contentModal {
+            text-align: center;
+        }
+        .image-row {
+            display: flex;
+            justify-content: center; /* Centra las imágenes horizontalmente */
+            align-items: center; /* Centra las imágenes verticalmente */
+            gap: 10px; /* Espacio entre las imágenes */
+        }
+
+        .image-row img {
+            width: 150px; /* Ancho de las imágenes */
+            height: 150px; /* Altura de las imágenes */
+            border-radius: 50%; /* Hace las imágenes circulares */
+            object-fit: cover; /* Ajusta la imagen dentro del contenedor */
+        }
+
+.wallet-button {
+background-color: white;
+ color: white;
+ padding: 10px 20px;
+ border: none;
+ border-radius: 5px;
+ font-size: 16px;
+ cursor: pointer;
+ display: flex;
+ align-items: center;
+ }
+ .wallet-button img {
+ margin-right: 10px;
+ }
+
+
+.containerboton {
+ position: relative;
+ width: 30px;
+}
+
+.containerboton .btn {
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ background-color: transparent;
+ border: none;
+ cursor: pointer;
+}
+
+.containerboton .btn img {
+ width: 30px;
+ height: auto;
+}
+
+
+    </style>
+
+    <script>
+        function downloadFile() {
+            const link = document.createElement('a');
+            link.href = 'JairPulido.vcf';
+            link.download = 'JairPulido.vcf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+    <script src="https://apis.google.com/js/platform.js" type="text/javascript"></script>
+    <script async crossorigin="anonymous" src="https://applepay.cdn-apple.com/jsapi/1/latest/apple-pay-sdk.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="profile-section">
+                <img src="JairPulido.png" alt="Profile Image" class="profile-image">
+                <div class="profile-info">
+                  <h1>JairPulido</h1>
+                  <p>IT Manager</p>
+                  
+                </div>
+                
+              </div>
+             
+          
+        </div>
+        <div class="card">
+            <div class="contact-section">
+                <h2 class="section-title">Compartir tu Contacto</h2>
+                
+                <a href="https://lowito9.github.io/JCDecauxForm/Salesforce.html">
+                <div class="link-item" id="copyLink">
+                    <div class="link-text">
+                        <div class="link-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                            </svg>
+                        </div>
+                        Haz clic aqui
+                    </div>
+                    <div class="arrow-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </div>
+                </div>
+               </a>
+            </div>
+
+        </div>
+        <div class="card">
+            <div class="contact-data">
+                <div class="data-header">
+                    <div class="data-icon">
+                        <img src="user.png" alt="Imagen de ejemplo">
+                    </div>
+                    <div class="data-title">Datos del Contacto</div>
+                </div>
+                
+                <div class="data-item">
+                    <div class="data-label">Número de Celular</div>
+                    <div class="data-value">55 5422 1291</div>
+                </div>
+                
+                <div class="data-item">
+                    <div class="data-label">Correo Electrónico</div>
+                    <div class="data-value">luis.lopez@jcdecaux.com</div>
+                </div>
+                
+                <div class="data-item">
+                    <div class="data-label">Dirección</div>
+                    <div class="data-address">
+                        Blvd. Manuel Ávila Camacho<br>
+                        #76 Piso 5, Colonia Lomas de Chapultepec<br>
+                        CDMX, Miguel Hidalgo, 11000<br>
+                        México
+                    </div>
+                    
+                    <button class="direction-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 5px;">
+                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                        </svg>
+                        Direction
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <img src="imagen1.png" alt="Imagen de ejemplo">
+        </div>    
+        <div class="card">
+            <img src="imagen2.png" alt="Imagen de ejemplo">
+        </div>  
+        <div class="card">
+            <img src="imagen3.png" alt="Imagen de ejemplo">
+        </div>  
+        <div class="card">
+            <img src="imagen4.png" alt="Imagen de ejemplo">
+        </div>  
+        <div class="card">
+            <img src="imagen5.png" alt="Imagen de ejemplo">
+        </div> 
+        <div class="fixed-div bottom-left"> 
+                 
+            <div class="contact-buttons">
+                <div class="qr-button" id="qr-button">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXFyLWNvZGUiPjxyZWN0IHdpZHRoPSI1IiBoZWlnaHQ9IjUiIHg9IjMiIHk9IjMiIHJ4PSIxIi8+PHJlY3Qgd2lkdGg9IjUiIGhlaWdodD0iNSIgeD0iMTYiIHk9IjMiIHJ4PSIxIi8+PHJlY3Qgd2lkdGg9IjUiIGhlaWdodD0iNSIgeD0iMyIgeT0iMTYiIHJ4PSIxIi8+PHBhdGggZD0iTTIxIDE2aC0zYTIgMiAwIDAgMC0yIDJ2MyIvPjxwYXRoIGQ9Ik0yMSAyMXYuMDEiLz48cGF0aCBkPSJNMyAxMGEyIDIgMCAwIDEgMi0oMkg3Ii8+PHBhdGggZD0iTTEwIDN2LjAxIi8+PHBhdGggZD0iTTEwIDEwdi4wMSIvPjxwYXRoIGQ9Ik0xMyAxM3YuMDEiLz48cGF0aCBkPSJNMTYgMTN2LjAxIi8+PHBhdGggZD0iTTEzIDE2di4wMSIvPjxwYXRoIGQ9Ik0xMyAyMXYuMDEiLz48cGF0aCBkPSJNMTYgMjF2LjAxIi8+PHBhdGggZD0iTTEwIDE2di0zYTIgMiAwIDAgMSAyLTJoMyIvPjxwYXRoIGQ9Ik0xMCAyMXYuMDEiLz48L3N2Zz4=" alt="QR Code">
+                  </div>
+               
+               
+              </div>
+              
+        </div>
+        <div class="fixed-div bottom-right"> 
+                 
+            <div class="contact-buttons">
+               
+               
+                <button class="add-contact-button" onclick="downloadFile()" id="add-contact-button">
+                    Add to Contact <span class="plus-icon"></span>
+                    <div class="circle">
+                        
+                    </div>
+                  </button>
+              </div>
+              
+        </div>
+    </div>
+       
+    <div id="myModal" class="modal">
+        <!-- Contenido de la ventana modal -->
+        <div class="modal-content">
+            <button class="close">&times;</button>
+            <div class="containerModal">
+                <div class="contentModal">
+                    <div class="image-row">
+                        <img src="Luis_v1.png" alt="Profile Image" class="profile-image">
+                        
+                    </div>
+                    <div class="image-row">
+                        
+                        <h2>Luis Adolfo Lopez</h2>
+                        
+                    </div>
+                    <div class="image-row">
+                        
+                        <h4>IT Director Mexico</h4>
+                       
+                    </div>
+                    <div class="image-row">
+                        <img src="qr.png" alt="Imagen 2">
+                    </div>
+                    <div class="wallet-button">
+
+	
+
+<a href="https://pay.google.com/gp/v/save/eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJqY2QtNzVAdHJhY2tlci03NTU2Yi5pYW0uZ3NlcnZpY2VhY2NvdW50LmNvbSIsImF1ZCI6Imdvb2dsZSIsIm9yaWdpbnMiOltdLCJ0eXAiOiJzYXZldG93YWxsZXQiLCJwYXlsb2FkIjp7ImdlbmVyaWNPYmplY3RzIjpbeyJpZCI6IjMzODgwMDAwMDAwMjI5MTAxMjMuam9lbDEyMjQ4MV9ob3RtYWlsLmNvbSIsImNsYXNzSWQiOiIzMzg4MDAwMDAwMDIyOTEwMTIzLmNvZGVsYWJfY2xhc3MyIiwiZ2VuZXJpY1R5cGUiOiJHRU5FUklDX1RZUEVfVU5TUEVDSUZJRUQiLCJoZXhCYWNrZ3JvdW5kQ29sb3IiOiIjMDAyYjU0IiwibG9nbyI6eyJzb3VyY2VVcmkiOnsidXJpIjoiaHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3dhbGxldC1sYWItdG9vbHMtY29kZWxhYi1hcnRpZmFjdHMtcHVibGljL3Bhc3NfZ29vZ2xlX2xvZ28uanBnIn19LCJjYXJkVGl0bGUiOnsiZGVmYXVsdFZhbHVlIjp7Imxhbmd1YWdlIjoiZW4iLCJ2YWx1ZSI6IkpDRGVjYXV4In19LCJzdWJoZWFkZXIiOnsiZGVmYXVsdFZhbHVlIjp7Imxhbmd1YWdlIjoiZW4iLCJ2YWx1ZSI6IklUIERpcmVjdG9yIE1leGljbyJ9fSwiaGVhZGVyIjp7ImRlZmF1bHRWYWx1ZSI6eyJsYW5ndWFnZSI6ImVuIiwidmFsdWUiOiJMdWlzIEFkb2xmbyBMb3BleiJ9fSwiYmFyY29kZSI6eyJ0eXBlIjoiUVJfQ09ERSIsInZhbHVlIjoiMzM4ODAwMDAwMDAyMjkxMDEyMy5qb2VsMTIyNDgxX2hvdG1haWwuY29tIn0sImhlcm9JbWFnZSI6eyJzb3VyY2VVcmkiOnsidXJpIjoiaHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3dhbGxldC1sYWItdG9vbHMtY29kZWxhYi1hcnRpZmFjdHMtcHVibGljL2dvb2dsZS1pby1oZXJvLWRlbW8tb25seS5qcGcifX0sInRleHRNb2R1bGVzRGF0YSI6W3siaGVhZGVyIjoiVEVMRUZPTk8iLCJib2R5IjoiNTU1NDIyMTI5MSIsImlkIjoidGVsZWZvbm8ifSx7ImhlYWRlciI6IkVNQUlMIiwiYm9keSI6Ikx1aXMubG9wZXpAamNkZWNhdXguY29tIiwiaWQiOiJlbWFpbCJ9XX1dfSwiaWF0IjoxNzQ0MzI3MTUxfQ.Iz0K41Q5EWoGSsjMqulGlzUEETi5DB08Qi_qwP5mZyeLqm0CbP3CuPeRhETsg2rHsDJIrP0g-FtX4zclQZ6fhBddt6vXif_QLAMTNdPHknbYpNynUmFMVFyrO0hBbI7ra5357Gd-nX2dvqPhtPmEcAfZEaZA5ePLhx4RBfamHY6-5ugdkjwy5D3lV7KxKRWSHiTcel6bZXi_A4c2WKP0Mn715mA2PwmzctxxUJZpJ-U1Bp5f6b5DqPHnjaUhErpg9xq_MCY4WiAFqRkRhkKYzmlqhO30eitNlcj6IqUIJv3P6fm4l3blScTPJV1CaVqbZnk_eDdcomn49tZgyawI_w" class="btn">
+<img src="gwallet2.png" alt="Imagen del botón">
+    
+    </a>
+
+
+                     </div>    
+                   
+               
+            </div>
+            
+        </div>
+    </div>
+    </div>
+    <script>
+        // Obtener la ventana modal
+        var modal = document.getElementById("myModal");
+
+        // Obtener el botón que abre la ventana modal
+        var btn = document.getElementById("qr-button");
+
+        // Obtener el elemento <span> que cierra la ventana modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // Cuando el usuario hace clic en el botón, abre la ventana modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // Cuando el usuario hace clic en <span> (x), cierra la ventana modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Cuando el usuario hace clic fuera de la ventana modal, cierra la ventana modal
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+   
+
+</body>
+</html>
