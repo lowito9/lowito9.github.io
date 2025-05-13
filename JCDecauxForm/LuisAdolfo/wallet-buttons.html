@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar a Wallet</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px 0;
+            background: linear-gradient(145deg, #6a11cb, #2575fc);
+            color: white;
+        }
+        .card-header {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .card-content {
+            margin-bottom: 20px;
+        }
+        .wallet-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        .wallet-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        .apple-button {
+            background-color: #000;
+            color: white;
+        }
+        .google-button {
+            background-color: #4285F4;
+            color: white;
+        }
+        .apple-button:hover {
+            background-color: #333;
+        }
+        .google-button:hover {
+            background-color: #3367D6;
+        }
+        .logo {
+            height: 24px;
+        }
+        .device-detection {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">Mi Tarjeta Digital</div>
+        <div class="card-content">
+            <p>¡Añade esta tarjeta a tu wallet favorito para tenerla siempre a mano!</p>
+        </div>
+        
+        <div class="wallet-buttons">
+            <button id="apple-wallet-button" class="wallet-button apple-button">
+                <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                    <path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+                </svg>
+                Añadir a Apple Wallet
+            </button>
+            <button id="google-wallet-button" class="wallet-button google-button">
+                <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm0 2c5.5 0 10 4.5 10 10s-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2zm-6.5 7.5c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm13 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6.5 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                </svg>
+                Añadir a Google Pay
+            </button>
+        </div>
+        
+        <div id="device-info" class="device-detection">
+            Detectando tipo de dispositivo...
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const appleButton = document.getElementById('apple-wallet-button');
+            const googleButton = document.getElementById('google-wallet-button');
+            const deviceInfo = document.getElementById('device-info');
+            
+            // URLs de ejemplo para los passes
+            // En un entorno real, estas serían las URLs a tus archivos .pkpass o .json
+            const applePassUrl = "https://tudominio.com/passes/ejemplo.pkpass";
+            const googlePassUrl = "https://pay.google.com/gp/v/save/EJEMPLO_JWT_TOKEN";
+            
+            // Detectar el sistema operativo
+            function detectOS() {
+                const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+                
+                // Detectar iOS
+                if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                    deviceInfo.textContent = "Dispositivo iOS detectado";
+                    appleButton.style.display = "flex";
+                    googleButton.style.display = "none";
+                    return "iOS";
+                }
+                
+                // Detectar Android
+                if (/android/i.test(userAgent)) {
+                    deviceInfo.textContent = "Dispositivo Android detectado";
+                    appleButton.style.display = "none";
+                    googleButton.style.display = "flex";
+                    return "Android";
+                }
+                
+                // Si no es móvil o no se puede determinar
+                deviceInfo.textContent = "Dispositivo desktop o no identificado. Se muestran ambas opciones.";
+                appleButton.style.display = "flex";
+                googleButton.style.display = "flex";
+                return "unknown";
+            }
+            
+            // Función para añadir al Apple Wallet
+            function addToAppleWallet() {
+                window.location.href = applePassUrl;
+            }
+            
+            // Función para añadir a Google Pay
+            function addToGooglePay() {
+                // Si tienes la API de Google Pay
+                if (window.PaymentRequest) {
+                    // Usar la API de Google Pay si está disponible
+                    try {
+                        window.location.href = googlePassUrl;
+                    } catch (error) {
+                        console.error("Error al abrir Google Pay:", error);
+                        alert("No se pudo abrir Google Pay. Por favor, inténtalo más tarde.");
+                    }
+                } else {
+                    // Fallback: redireccionar a la URL del pass
+                    window.location.href = googlePassUrl;
+                }
+            }
+            
+            // Añadir event listeners a los botones
+            appleButton.addEventListener('click', addToAppleWallet);
+            googleButton.addEventListener('click', addToGooglePay);
+            
+            // Detectar OS al cargar
+            const os = detectOS();
+            
+            // Si es un dispositivo iOS, mostrar solo el botón de Apple
+            if (os === 'iOS') {
+                // Ya se ha manejado en la función detectOS
+            } 
+            // Si es un dispositivo Android, mostrar solo el botón de Google
+            else if (os === 'Android') {
+                // Ya se ha manejado en la función detectOS
+            }
+        });
+    </script>
+</body>
+</html>

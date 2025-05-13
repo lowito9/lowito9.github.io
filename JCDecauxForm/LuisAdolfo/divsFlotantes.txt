@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divs Flotantes</title>
+    <style>
+        .fixed-div {
+            position: fixed;
+            width: 200px;
+            height: 100px;
+            background-color: lightblue;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            padding: 10px;
+            text-align: center;
+        }
+        .top-left {
+            top: 10px;
+            left: 10px;
+        }
+        .top-right {
+            top: 10px;
+            right: 10px;
+        }
+        .bottom-left {
+            bottom: 10px;
+            left: 10px;
+        }
+        .bottom-right {
+            bottom: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="fixed-div top-left">Top Left</div>
+    <div class="fixed-div top-right">Top Right</div>
+    <div class="fixed-div bottom-left">Bottom Left</div>
+    <div class="fixed-div bottom-right">Bottom Right</div>
+    <div style="height: 2000px;">
+        <p>Desplázate hacia abajo para ver los divs flotantes en acción.</p>
+    </div>
+</body>
+</html>

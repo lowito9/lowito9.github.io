@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Business Card</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+    
+    body {
+      background-color: #e6f0fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    
+    .card-container {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      padding-bottom: 30px;
+    }
+    
+    .card {
+      width: 100%;
+      background-color: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+    
+    .profile-section {
+      position: relative;
+      width: 100%;
+      height: 460px;
+    }
+    
+    .profile-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.95);
+    }
+    
+    .profile-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px;
+      color: white;
+      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    }
+    
+    .profile-info h1 {
+      font-size: 42px;
+      margin-bottom: 5px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+    
+    .profile-info p {
+      font-size: 24px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+    
+    .contact-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px 0;
+    }
+    
+    .contact-button {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #002b54;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    
+    .contact-button:hover {
+      transform: scale(1.1);
+    }
+    
+    .contact-button img {
+      width: 30px;
+      height: 30px;
+      filter: invert(1);
+    }
+    
+    .bottom-buttons {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+    
+    .qr-button, .share-button {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #002b54;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    
+    .qr-button img, .share-button img {
+      width: 30px;
+      height: 30px;
+      filter: invert(1);
+    }
+    
+    .add-contact-button {
+      position: absolute;
+      right: 20px;
+      bottom: 0;
+      background-color: #002b54;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 15px 20px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .add-contact-button:hover {
+      background-color: #003c73;
+    }
+    
+    .plus-icon {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      z-index: 10;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .modal-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 300px;
+      width: 100%;
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+    
+    .close-modal {
+      cursor: pointer;
+      font-size: 20px;
+    }
+    
+    .qr-code {
+      width: 100%;
+      height: auto;
+      margin-bottom: 15px;
+    }
+    .data-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #0275d8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      margin-right: 10px;
+  }
+  
+  .data-title {
+      font-size: 18px;
+      font-weight: 500;
+      color: #333;
+  }
+  
+  .data-item {
+      margin-bottom: 20px;
+  }
+  
+  .data-label {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 5px;
+      color: #333;
+  }
+  
+  .data-value {
+      font-size: 15px;
+      color: #666;
+  }
+  
+  .data-address {
+      margin-top: 5px;
+      font-size: 15px;
+      color: #666;
+      line-height: 1.5;
+  }
+  
+  .direction-button {
+      background-color: #043c78;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 16px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      display: inline-flex;
+      align-items: center;
+      margin-top: 10px;
+  }
+  
+  .direction-button:hover {
+      background-color: #032a54;
+  }
+  
+  .gallery {
+      margin-bottom: 20px;
+  }
+  
+  .gallery-image {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Add to Contact floating button */
+  .add-contact-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+  }
+  
+  .add-contact-text {
+      background-color: #043c78;
+      color: white;
+      padding: 12px 15px;
+      border-radius: 25px;
+      font-weight: 500;
+      margin-right: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .add-contact-button {
+      width: 48px;
+      height: 48px;
+      background-color: #043c78;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s;
+  }
+  
+  .add-contact-button:hover {
+      transform: scale(1.1);
+  }
+  
+  /* QR code button at bottom left */
+  .qr-button {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 48px;
+      height: 48px;
+      background-color: #fff;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #043c78;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  </style>
+</head>
+<body>
+  <div class="card-container">
+    <div class="card">
+      <div class="profile-section">
+        <img src="Luis.png" alt="Profile Image" class="profile-image">
+        <div class="profile-info">
+          <h1>Luis Adolfo Lopez</h1>
+          <p>IT Director Mexico</p>
+        </div>
+      </div>
+      <div class="contact-buttons">
+        <div class="contact-button" id="phone-button">
+          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXNtYXJ0cGhvbmUiPjxyZWN0IHdpZHRoPSIxNCIgaGVpZ2h0PSIyMCIgeD0iNSIgeT0iMiIgcng9IjIiLz48cGF0aCBkPSJNMTIgMThoLjAxIi8+PC9zdmc+" alt="Phone">
+        </div>
+        <div class="contact-button" id="email-button">
+          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLW1haWwiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIxNiIgeD0iMiIgeT0iNCIgcng9IjIiLz48cGF0aCBkPSJtMjIgNy0xMCA3TDIgNyIvPjwvc3ZnPg==" alt="Email">
+        </div>
+        <div class="contact-button" id="location-button">
+          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLW1hcC1waW4iPjxwYXRoIGQ9Ik0yMCAxMGMwIDYtOCAxMi04IDEycy04LTYtOC0xMmE4IDggMCAwIDEgMTYgMFoiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjEwIiByPSIzIi8+PC9zdmc+" alt="Location">
+        </div>
+      </div>
+    </div>
+    
+    <div class="bottom-buttons">
+      <div class="qr-button" id="qr-button">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXFyLWNvZGUiPjxyZWN0IHdpZHRoPSI1IiBoZWlnaHQ9IjUiIHg9IjMiIHk9IjMiIHJ4PSIxIi8+PHJlY3Qgd2lkdGg9IjUiIGhlaWdodD0iNSIgeD0iMTYiIHk9IjMiIHJ4PSIxIi8+PHJlY3Qgd2lkdGg9IjUiIGhlaWdodD0iNSIgeD0iMyIgeT0iMTYiIHJ4PSIxIi8+PHBhdGggZD0iTTIxIDE2aC0zYTIgMiAwIDAgMC0yIDJ2MyIvPjxwYXRoIGQ9Ik0yMSAyMXYuMDEiLz48cGF0aCBkPSJNMyAxMGEyIDIgMCAwIDEgMi0oMkg3Ii8+PHBhdGggZD0iTTEwIDN2LjAxIi8+PHBhdGggZD0iTTEwIDEwdi4wMSIvPjxwYXRoIGQ9Ik0xMyAxM3YuMDEiLz48cGF0aCBkPSJNMTYgMTN2LjAxIi8+PHBhdGggZD0iTTEzIDE2di4wMSIvPjxwYXRoIGQ9Ik0xMyAyMXYuMDEiLz48cGF0aCBkPSJNMTYgMjF2LjAxIi8+PHBhdGggZD0iTTEwIDE2di0zYTIgMiAwIDAgMSAyLTJoMyIvPjxwYXRoIGQ9Ik0xMCAyMXYuMDEiLz48L3N2Zz4=" alt="QR Code">
+      </div>
+      <div class="share-button" id="share-button">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXVwbG9hZCI+PHBhdGggZD0iTTIxIDE1djRhMiAyIDAgMCAxLTIgMkg1YTIgMiAwIDAgMS0yLTJ2LTQiLz48cG9seWxpbmUgcG9pbnRzPSIxNyA4IDEyIDMgNyA4Ii8+PHBhdGggZD0iTTEyIDMgdiAxNCIvPjwvc3ZnPg==" alt="Share">
+      </div>
+    </div>
+    
+    <button class="add-contact-button" id="add-contact-button">
+      Add to Contact <span class="plus-icon">+</span>
+    </button>
+  </div>
+  <div class="card-container">
+    <div class="card">
+      <div class="profile-section">
+        <img src="Luis.png" alt="Profile Image" class="profile-image">
+        <div class="profile-info">
+          <h1>Luis Adolfo Lopez</h1>
+          <p>IT Director Mexico</p>
+        </div>
+      </div>
+      <div class="contact-buttons">
+        <div class="contact-button" id="phone-button">
+          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXNtYXJ0cGhvbmUiPjxyZWN0IHdpZHRoPSIxNCIgaGVpZ2h0PSIyMCIgeD0iNSIgeT0iMiIgcng9IjIiLz48cGF0aCBkPSJNMTIgMThoLjAxIi8+PC9zdmc+" alt="Phone">
+        </div>
+        <div class="contact-button" id="email-button">
+          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLW1haWwiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIxNiIgeD0iMiIgeT0iNCIgcng9IjIiLz48cGF0aCBkPSJtMjIgNy0xMCA3TDIgNyIvPjwvc3ZnPg==" alt="Email">
+        </div>
+        <div class="contact-button" id="location-button">
+          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLW1hcC1waW4iPjxwYXRoIGQ9Ik0yMCAxMGMwIDYtOCAxMi04IDEycy04LTYtOC0xMmE4IDggMCAwIDEgMTYgMFoiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjEwIiByPSIzIi8+PC9zdmc+" alt="Location">
+        </div>
+      </div>
+    </div>
+    
+    <div class="bottom-buttons">
+      <div class="qr-button" id="qr-button">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXFyLWNvZGUiPjxyZWN0IHdpZHRoPSI1IiBoZWlnaHQ9IjUiIHg9IjMiIHk9IjMiIHJ4PSIxIi8+PHJlY3Qgd2lkdGg9IjUiIGhlaWdodD0iNSIgeD0iMTYiIHk9IjMiIHJ4PSIxIi8+PHJlY3Qgd2lkdGg9IjUiIGhlaWdodD0iNSIgeD0iMyIgeT0iMTYiIHJ4PSIxIi8+PHBhdGggZD0iTTIxIDE2aC0zYTIgMiAwIDAgMC0yIDJ2MyIvPjxwYXRoIGQ9Ik0yMSAyMXYuMDEiLz48cGF0aCBkPSJNMyAxMGEyIDIgMCAwIDEgMi0oMkg3Ii8+PHBhdGggZD0iTTEwIDN2LjAxIi8+PHBhdGggZD0iTTEwIDEwdi4wMSIvPjxwYXRoIGQ9Ik0xMyAxM3YuMDEiLz48cGF0aCBkPSJNMTYgMTN2LjAxIi8+PHBhdGggZD0iTTEzIDE2di4wMSIvPjxwYXRoIGQ9Ik0xMyAyMXYuMDEiLz48cGF0aCBkPSJNMTYgMjF2LjAxIi8+PHBhdGggZD0iTTEwIDE2di0zYTIgMiAwIDAgMSAyLTJoMyIvPjxwYXRoIGQ9Ik0xMCAyMXYuMDEiLz48L3N2Zz4=" alt="QR Code">
+      </div>
+      <div class="share-button" id="share-button">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXVwbG9hZCI+PHBhdGggZD0iTTIxIDE1djRhMiAyIDAgMCAxLTIgMkg1YTIgMiAwIDAgMS0yLTJ2LTQiLz48cG9seWxpbmUgcG9pbnRzPSIxNyA4IDEyIDMgNyA4Ii8+PHBhdGggZD0iTTEyIDMgdiAxNCIvPjwvc3ZnPg==" alt="Share">
+      </div>
+    </div>
+    
+    <button class="add-contact-button" id="add-contact-button">
+      Add to Contact <span class="plus-icon">+</span>
+    </button>
+  </div>
+  <!-- QR Code Modal -->
+  <div class="modal" id="qr-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Scan QR Code</h3>
+        <span class="close-modal" id="close-qr-modal">&times;</span>
+      </div>
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNDAiIGhlaWdodD0iMjQwIiB2aWV3Qm94PSIwIDAgMjQwIDI0MCI+PHBhdGggZD0iTTAgMGgyNDB2MjQwSDB6IiBmaWxsPSIjZmZmZmZmIi8+PHBhdGggZD0iTTQwIDQwaDI0djI0SDQwem0yNCAwaDI0djI0SDY0em0yNCAwaDI0djI0SDg4em0yNCAwaDI0djI0aC0yNHptMjQgMGgyNHYyNGgtMjR6bTI0IDBoMjR2MjRoLTI0ek00MCA2NGgyNHYyNEg0MHptNDggMGgyNHYyNEg4OHptMjQgMGgyNHYyNGgtMjR6bTQ4IDBoMjR2MjRoLTI0em00OCAwaDI0djI0aC0yNHpNNDAgODhoMjR2MjRINDB6bTI0IDBoMjR2MjRINjR6bTI0IDBoMjR2MjRIODh6bTI0IDBoMjR2MjRoLTI0em0yNCAwaDI0djI0aC0yNHptMjQgMGgyNHYyNGgtMjR6TTE2IDExMmgyNHYyNEgxNnptMjQgMGgyNHYyNEg0MHptNDggMGgyNHYyNEg4OHptMjQgMGgyNHYyNGgtMjR6bTQ4IDBoMjR2MjRoLTI0ek0xNiAxMzZoMjR2MjRIMTZ6bTI0IDBoMjR2MjRINDB6bTI0IDBoMjR2MjRINjR6bTI0IDBoMjR2MjRIODh6bTI0IDBoMjR2MjRoLTI0em00OCAwaDI0djI0aC0yNHpNMTYgMTYwaDI0djI0SDE2em00OCAwaDI0djI0SDY0em0yNCAwaDI0djI0SDg4em04MCAwaDI0djI0aC0yNHpNNDAgMTg0aDI0djI0SDQwem00OCAwaDI0djI0SDg4em00OCAwaDI0djI0aC0yNHptMjQgMGgyNHYyNGgtMjR6bTI0IDBoMjR2MjRoLTI0eiIgZmlsbD0iIzAwMDAwMCIvPjwvc3ZnPg==" alt="QR Code" class="qr-code">
+      <p>Scan this QR code to save contact information</p>
+    </div>
+ <div class="contact-section">
+                <h2 class="section-title">Compartir tu Contacto</h2>
+                <p class="section-subtitle">Description</p>
+                
+                <div class="link-item" id="copyLink">
+                    <div class="link-text">
+                        <div class="link-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                            </svg>
+                        </div>
+                        Clic Aquí
+                    </div>
+                    <div class="arrow-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+  </div>
+  
+  <script>
+    // Modal functionality
+    const qrButton = document.getElementById('qr-button');
+    const qrModal = document.getElementById('qr-modal');
+    const closeQrModal = document.getElementById('close-qr-modal');
+    
+    qrButton.addEventListener('click', () => {
+      qrModal.style.display = 'flex';
+    });
+    
+    closeQrModal.addEventListener('click', () => {
+      qrModal.style.display = 'none';
+    });
+    
+    // Close modal when clicking outside
+    window.addEventListener('click', (event) => {
+      if (event.target === qrModal) {
+        qrModal.style.display = 'none';
+      }
+    });
+    
+    // Contact buttons functionality
+    document.getElementById('phone-button').addEventListener('click', () => {
+      alert('Calling Luis Adolfo Lopez...');
+      // In a real application, you would use: window.location.href = 'tel:+1234567890';
+    });
+    
+    document.getElementById('email-button').addEventListener('click', () => {
+      alert('Opening email to Luis Adolfo Lopez...');
+      // In a real application, you would use: window.location.href = 'mailto:luis.lopez@example.com';
+    });
+    
+    document.getElementById('location-button').addEventListener('click', () => {
+      alert('Opening location information...');
+      // In a real application, you would use: window.location.href = 'https://maps.google.com/?q=Mexico+City';
+    });
+    
+    document.getElementById('share-button').addEventListener('click', () => {
+      if (navigator.share) {
+        navigator.share({
+          title: 'Luis Adolfo Lopez Contact Info',
+          text: 'Contact information for Luis Adolfo Lopez, IT Director Mexico',
+          url: window.location.href,
+        })
+        .catch((error) => console.log('Error sharing', error));
+      } else {
+        alert('Share functionality is not available on your device');
+      }
+    });
+    
+    document.getElementById('add-contact-button').addEventListener('click', () => {
+      alert('Adding Luis Adolfo Lopez to contacts...');
+      // In a real application, you would use the Contacts API or download a vCard
+    });
+  </script>
+</body>
+</html>

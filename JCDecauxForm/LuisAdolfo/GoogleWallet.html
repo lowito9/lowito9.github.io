@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generar JWT para Google Wallet</title>
+     <script src="https://cdn.rawgit.com/kjur/jsrsasign/master/jsrsasign-all-min.js"></script>
+</head>
+<body>
+    <h2>Generador de JWT para Google Wallet</h2>
+    
+    <button id="generateJWTButton">Generar JWT</button>
+    <p id="generatedUrl"></p>
+
+    <script>
+        // Tu clave privada (FÍCTICIA PARA DEMO - NO DEBES USARLA EN PRODUCCIÓN)
+        const privateKey = `-----BEGIN PRIVATE KEY-----
+MIIBVwIBADANBgkqhkiG9w0BAQEFAASCAT8wggE7AgEAAkEAurzw+uCrY3Sn+Yso
+IEfgUgcDyrBgJvTxz6bBB2nZ9jAFsmFzUN5rDXYMkBAYwv9h+cNLQ9LqXrLCZgk6
+9Uw0qQIDAQABAkA95jZt6Gv7kUfiMXZt3a3UXthl6G0gSvU+rsYHUNL4Bi4yJXnZ
+dSxw0r1x2MSgtJ6WIleWkzHa8ASwLRM3b5YhAiEA5pVAr2O7mAAt5L0IKNSWvBC1
+JXSCwA/Po7RPx+IcxQsCIQDC25Sg1s0svRgMdscz2m7Zyqg6ycuyJzp3JPZ3JGmn
+dQIhAJqww9B9HGLsC8X1+paKfNkS12fQ3iMNipUECzS8FvFvAiEA2ENFtnzocGyR
+uLM2AgPGoDnFENQExVsk3Nn1pYrkhlcCIQCYWDChq5VPWscYrN5WemW0DyzF0OZ6
+5bfOguzvF9w4Jw==
+-----END PRIVATE KEY-----`;
+
+        // Información que se incluirá en el JWT
+        const payload = {
+            "iss": "tu-correo@tudominio.com", // El correo de tu cuenta de servicio
+            "aud": "google",
+            "origins": ["https://tudominio.com"], // El dominio de tu app
+            "typ": "savetowallet",
+            "payload": {
+                "loyaltyObjects": [
+                    {
+                        "id": "3388000000000000000.demoTarjetaClase.demoUsuario1",
+                        "classId": "3388000000000000000.demoTarjetaClase",
+                        "state": "active",
+                        "accountId": "usuario001",
+                        "accountName": "Juan Pérez",
+                        "barcode": {
+                            "type": "qrCode",
+                            "value": "https://tudominio.com/contacto/juanperez"
+                        },
+                        "infoModuleData": {
+                            "labelValueRows": [
+                                {
+                                    "columns": [
+                                        { "label": "Email", "value": "juan.perez@email.com" },
+                                        { "label": "Teléfono", "value": "+52 123 456 7890" }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        };
+
+        // Función para generar el JWT
+        function generateJWT() {
+            const header = { alg: "RS256", typ: "JWT" };
+            const jwtToken = KJUR.jws.JWS.sign("RS256", header, payload, privateKey);
+            const saveUrl = `https://pay.google.com/gp/v/save/${jwtToken}`;
+            document.getElementById("generatedUrl").innerHTML = `Haz clic para agregar a Google Wallet: <a href="${saveUrl}" target="_blank">${saveUrl}</a>`;
+        }
+
+        // Generar JWT cuando el usuario haga clic en el botón
+        document.getElementById("generateJWTButton").onclick = generateJWT;
+    </script>
+</body>
+</html>

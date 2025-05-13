@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Prueba Clave PKCS#8</title>
+  <script src="https://cdn.jsdelivr.net/npm/jsrsasign@10.5.26/lib/jsrsasign-all-min.js"></script>
+</head>
+<body>
+  <h2>Prueba de clave privada</h2>
+  <button onclick="probarClave()">Probar clave</button>
+  <pre id="resultado"></pre>
+
+  <script>
+    const clavePrivada = 
+"-----BEGIN PRIVATE KEY-----\n" +
+"MIIBVwIBADANBgkqhkiG9w0BAQEFAASCAT8wggE7AgEAAkEAurzw+uCrY3Sn+Yso\n" +
+"IEfgUgcDyrBgJvTxz6bBB2nZ9jAFsmFzUN5rDXYMkBAYwv9h+cNLQ9LqXrLCZgk6\n" +
+"9Uw0qQIDAQABAkA95jZt6Gv7kUfiMXZt3a3UXthl6G0gSvU+rsYHUNL4Bi4yJXnZ\n" +
+"dSxw0r1x2MSgtJ6WIleWkzHa8ASwLRM3b5YhAiEA5pVAr2O7mAAt5L0IKNSWvBC1\n" +
+"JXSCwA/Po7RPx+IcxQsCIQDC25Sg1s0svRgMdscz2m7Zyqg6ycuyJzp3JPZ3JGmn\n" +
+"dQIhAJqww9B9HGLsC8X1+paKfNkS12fQ3iMNipUECzS8FvFvAiEA2ENFtnzocGyR\n" +
+"uLM2AgPGoDnFENQExVsk3Nn1pYrkhlcCIQCYWDChq5VPWscYrN5WemW0DyzF0OZ6\n" +
+"5bfOguzvF9w4Jw==\n" +
+"-----END PRIVATE KEY-----";
+
+    function probarClave() {
+      try {
+        const key = KEYUTIL.getKey(clavePrivada);
+        document.getElementById("resultado").textContent = "¡Clave válida!";
+        console.log(key);
+      } catch (error) {
+        document.getElementById("resultado").textContent = "ERROR:\n" + error;
+        console.error(error);
+      }
+    }
+  </script>
+</body>
+</html>

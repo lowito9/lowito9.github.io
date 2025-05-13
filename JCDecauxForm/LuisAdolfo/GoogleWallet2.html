@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Generar JWT - Google Wallet</title>
+  <script src="https://cdn.jsdelivr.net/npm/jsrsasign@10.5.26/lib/jsrsasign-all-min.js"></script>
+</head>
+<body>
+  <h2>Generar JWT para Google Wallet</h2>
+  <button onclick="generarJWT()">Generar JWT</button>
+  <pre id="resultado"></pre>
+
+  <script>
+    const privateKeyPEM = `-----BEGIN PRIVATE KEY-----
+MIIBVwIBADANBgkqhkiG9w0BAQEFAASCAT8wggE7AgEAAkEAurzw+uCrY3Sn+Yso
+IEfgUgcDyrBgJvTxz6bBB2nZ9jAFsmFzUN5rDXYMkBAYwv9h+cNLQ9LqXrLCZgk6
+9Uw0qQIDAQABAkA95jZt6Gv7kUfiMXZt3a3UXthl6G0gSvU+rsYHUNL4Bi4yJXnZ
+dSxw0r1x2MSgtJ6WIleWkzHa8ASwLRM3b5YhAiEA5pVAr2O7mAAt5L0IKNSWvBC1
+JXSCwA/Po7RPx+IcxQsCIQDC25Sg1s0svRgMdscz2m7Zyqg6ycuyJzp3JPZ3JGmn
+dQIhAJqww9B9HGLsC8X1+paKfNkS12fQ3iMNipUECzS8FvFvAiEA2ENFtnzocGyR
+uLM2AgPGoDnFENQExVsk3Nn1pYrkhlcCIQCYWDChq5VPWscYrN5WemW0DyzF0OZ6
+5bfOguzvF9w4Jw==
+-----END PRIVATE KEY-----`;
+
+    const header = { alg: "RS256", typ: "JWT" };
+
+    const payload = {
+      iss: "issuer-id-demo@ejemplo.com",
+      aud: "google",
+      origins: ["https://tusitio.com"],
+      typ: "savetowallet",
+      payload: {
+        loyaltyObjects: [{
+          id: "issuer-id-demo.tarjeta-clase.usuario-123",
+          classId: "issuer-id-demo.tarjeta-clase",
+          state: "active",
+          accountId: "123456",
+          accountName: "Juan Pérez",
+          barcode: {
+            type: "qrCode",
+            value: "https://tusitio.com/juan"
+          },
+          infoModuleData: {
+            labelValueRows: [{
+              columns: [
+                { label: "Teléfono", value: "+52 123 456 7890" },
+                { label: "Email", value: "juan@email.com" }
+              ]
+            }]
+          }
+        }]
+      }
+    };
+
+    function generarJWT() {
+      try {
+        // ✅ Conversión robusta del PEM a clave privada
+        const rsaKey = KEYUTIL.getKey(privateKeyPEM);
+
+        // ✅ Firma del JWT
+        const jwt = KJUR.jws.JWS.sign("RS256", header, payload, rsaKey);
+
+        // ✅ Mostrar el JWT generado
+        const url = `https://pay.google.com/gp/v/save/${jwt}`;
+        document.getElementById("resultado").textContent = url;
+      } catch (e) {
+        document.getElementById("resultado").textContent = "Error: " + e;
+        console.error(e);
+      }
+    }
+  </script>
+</body>
+</html>
